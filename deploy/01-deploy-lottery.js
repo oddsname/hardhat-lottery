@@ -38,7 +38,6 @@ module.exports = async ({ getNamedAccounts, deployments, network, ethers }) => {
         interval
     ];
 
-    console.log(args);
     const lottery = await deploy('Lottery', {
         from: deployer,
         args: args,
@@ -49,6 +48,10 @@ module.exports = async ({ getNamedAccounts, deployments, network, ethers }) => {
     if(!developmentChains.includes(network.name) && process.env.ETHERSCAN_KEY) {
         log('Verifying Contract...');
         await verify(lottery.address, args);
+    } else {
+        //need to add consumer to vrf coordinator to make local network work properly
+        const mockContract = await ethers.getContract('VRFCoordinatorV2Mock', deployer);
+        mockContract.addConsumer(subscriptionId, lottery.address);
     }
     log('--------------')
 }

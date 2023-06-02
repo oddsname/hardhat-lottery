@@ -42,5 +42,13 @@ module.exports = {
     player: {
       default: 1,
     }
-  }
+  },
+  gasReporter: {
+    enabled: false,
+    outputFile: "gas-report.txt",
+    noColors: true, //because we output to a file
+    currency: "USD",
+    coinmarketcap: COINMARKETCAP_KEY, // comment out if you don't need api requests
+    token: "ETH", //we can select different networks by specifying the currency and get actual price inside these networks
+  },
 };

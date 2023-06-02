@@ -65,6 +65,10 @@ contract Lottery is VRFConsumerBaseV2, AutomationCompatibleInterface {
         return s_players;
     }
 
+    function getPlayer(uint256 index) public view returns (address) {
+        return s_players[index];
+    }
+
     function getRecentWinner() public view returns(address) {
         return s_recentWinner;
     }
@@ -87,6 +91,22 @@ contract Lottery is VRFConsumerBaseV2, AutomationCompatibleInterface {
 
     function getRequestConfirmations() public pure returns(uint256)  {
         return REQUEST_CONFIRMATIONS;
+    }
+
+    function getInterval() public view returns(uint256) {
+        return i_interval;
+    }
+
+    function getGasLane() public view returns(bytes32) {
+        return i_gasLane;
+    }
+
+    function getSubscriptionId() public view returns(uint64) {
+        return i_subscriptionId;
+    }
+
+    function getGasLimit() public view returns (uint32) {
+        return i_callbackGasLimit;
     }
 
     function enterLottery() public payable isLotteryOpen checkFee {
