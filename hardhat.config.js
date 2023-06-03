@@ -43,6 +43,12 @@ module.exports = {
       default: 1,
     }
   },
+  etherscan: {
+    apiKey: ETHERSCAN_KEY,
+  },
+  mocha: {
+    timeout: 200000, //200 seconds
+  },
   gasReporter: {
     enabled: false,
     outputFile: "gas-report.txt",

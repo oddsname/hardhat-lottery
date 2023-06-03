@@ -132,11 +132,8 @@ contract Lottery is VRFConsumerBaseV2, AutomationCompatibleInterface {
 
     // This is the function that the Chainlink Keeper nodes call KeeperCompatibleInterface
     // they look for the 'upkeepNeeded' to return true
-    function checkUpkeep(bytes calldata checkData) external override returns (bool upkeepNeeded, bytes memory performData) {
-        return (
-            isAbleToGetWinner(),
-            checkData
-        );
+    function checkUpkeep(bytes calldata checkData) external override returns (bool upkeepNeeded, bytes memory) {
+        upkeepNeeded = isAbleToGetWinner();
     }
 
     function performUpkeep(bytes calldata) external override {

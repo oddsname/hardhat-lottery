@@ -4,7 +4,7 @@ const {expect, assert} = require("chai");
 const {developmentChains} = require('../../hardhat-config-helper');
 
 !developmentChains.includes(network.name)
-    ? describe.skip()
+    ? describe.skip('all', () => {})
     : describe("Lottery unit test", async () => {
         let lottery, vrfCoordinatorV2Mock, entranceFee, deployer, interval;
         const chainId = network.config.chainId;
@@ -14,7 +14,6 @@ const {developmentChains} = require('../../hardhat-config-helper');
             await deployments.fixture(['all']);
             lottery = await ethers.getContract('Lottery', deployer);
             vrfCoordinatorV2Mock = await ethers.getContract('VRFCoordinatorV2Mock', deployer);
-            console.log(vrfCoordinatorV2Mock.address);
             entranceFee = await lottery.getEntranceFee();
             interval = await lottery.getInterval();
         })
